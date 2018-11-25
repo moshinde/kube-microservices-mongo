@@ -19,7 +19,9 @@ kubectl create -f user-deployment.yml
 
 4. Create stock microservice deployment in stock-app-namespace (refer stock-service/stock-deployment.yml)
 
-kubectl create -f user-deployment.yml
+kubectl create -f stock-deployment.yml
+
+Environment variable USER_SERVICE_HOST is a host of user-deployment and which is used in stock-service as environment variable
 
 5. To get service urls 
 
