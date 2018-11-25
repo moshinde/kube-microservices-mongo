@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: stock-deployment
+  namespace: stock-app-namespace
 spec:
   replicas: 2
   template:
@@ -17,16 +18,17 @@ spec:
           containerPort: 8301
         env:
           - name: MONGO_INITDB_HOST
-            value: mongo-service
+            value: mongo-service.db-namespace.svc.cluster.local
           - name: MONGO_INITDB_DATABASE
             value: StockDB
           - name: USER_SERVICE_HOST
-            value: user-app-service
+            value: user-app-service.user-app-namespace.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: stock-app-service
+  namespace: stock-app-namespace
 spec:
   ports:
     - port: 8301
