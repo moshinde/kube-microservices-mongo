@@ -20,3 +20,8 @@ kubectl create -f user-deployment.yml
 4. Create stock microservice deployment in stock-app-namespace (refer stock-service/stock-deployment.yml)
 
 kubectl create -f user-deployment.yml
+
+5. To get service urls 
+minikube service mongo-service --namespace=db-namespace --url
+minikube service user-app-service --namespace=user-app-namespace --url
+minikube service stock-app-service --namespace=stock-app-namespace --url
