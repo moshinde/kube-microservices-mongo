@@ -1,6 +1,7 @@
 # microservices-mongo
 
-There are two microservcies user-service with user data and stock symbol and the other microservice stock service contains stock data 
+There are two microservcies user-service and stock-service. User-service handles user data and stock symbol.
+The other microservice is stock service contains stock data.
 
 1. Create namepsaces for database and other microservices
 
