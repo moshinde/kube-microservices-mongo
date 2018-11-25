@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-app-label
+    spec:
+      containers:
+      - name: user-container
+        image: monicashinde3/user-service-image:v1
+        ports:
+        - name: user-port
+          containerPort: 8300
+        env:
+          - name: MONGO_INITDB_HOST
+            value: mongo-service
+          - name: MONGO_INITDB_DATABASE
+            value: StockDB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-app-service
+spec:
+  ports:
+    - port: 8300
+  selector:
+    app: user-app-label
+  type: NodePort
