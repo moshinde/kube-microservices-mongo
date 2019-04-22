@@ -9,7 +9,7 @@ kubectl create namespace db-namespace
 
 kubectl create namespace user-app-namespace
 
-kubectl create namespace stock-app-label
+kubectl create namespace stock-app-namespace
 
 2. Create mongo db pod in db-namespace(Refer mongo-pod.yml)
 
