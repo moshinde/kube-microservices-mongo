@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-deployment
-  namespace: user-app-namespace
+  namespace: $ENV
   labels:
     app: user-app-label
 spec:
@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: user-container
-        image: monicashinde3/user-service-image:v1
+        image: monicashinde3/user-service-image:$BUILD_NUMBER
         ports:
         - name: user-port
           containerPort: 8300
         env:
           - name: MONGO_INITDB_HOST
-            value: mongo-service.db-namespace.svc.cluster.local
+            value: mongo-service.$ENV.svc.cluster.local
           - name: MONGO_INITDB_DATABASE
             value: StockDB
 ---
@@ -31,7 +31,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: user-app-service
-  namespace: user-app-namespace
+  namespace: $ENV
 spec:
   ports:
     - port: 8300

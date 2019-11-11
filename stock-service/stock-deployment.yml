@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stock-deployment
-  namespace: stock-app-namespace
+  namespace: $ENV
 spec:
   replicas: 2
   selector:
@@ -15,23 +15,23 @@ spec:
     spec:
       containers:
       - name: stock-container
-        image: monicashinde3/stock-service-image:v1
+        image: monicashinde3/stock-service-image:$BUILD_NUMBER
         ports:
         - name: stock-port
           containerPort: 8301
         env:
           - name: MONGO_INITDB_HOST
-            value: mongo-service.db-namespace.svc.cluster.local
+            value: mongo-service.$ENV.svc.cluster.local
           - name: MONGO_INITDB_DATABASE
             value: StockDB
           - name: USER_SERVICE_HOST
-            value: user-app-service.user-app-namespace.svc.cluster.local
+            value: user-app-service.$ENV.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: stock-app-service
-  namespace: stock-app-namespace
+  namespace: $ENV
 spec:
   ports:
     - port: 8301
