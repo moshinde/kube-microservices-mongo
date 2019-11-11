@@ -14,11 +14,11 @@ podTemplate(label: label, containers: [
                 git 'https://github.com/moshinde/kube-microservices-mongo.git'
                 script {
                     dir('user-service'){
-                        sh 'mvn clean install'
+                        sh 'mvn clean install -DskipTests=false'
                         user_image=docker.build("monicashinde3/user-service-image:${env.BUILD_NUMBER}")    
                     }
                     dir('stock-service'){
-                        sh 'mvn clean install'
+                        sh 'mvn clean install -DskipTests=false'
                         stock_image=docker.build("monicashinde3/stock-service-image:${env.BUILD_NUMBER}")    
                     }
                                     
